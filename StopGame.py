@@ -10,7 +10,7 @@ class stop_game:
     lastkey = ""
     lastkey_file = ""
 
-    def __init__(self, lastkey, lastkey_file):
+    def __init__(self, lastkey_file):
         self.lastkey_file = lastkey_file
 
         if os.path.exists(lastkey_file):

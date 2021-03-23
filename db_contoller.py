@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class db_controller:
 
     def __init__(self, database_file):
@@ -7,12 +8,10 @@ class db_controller:
         self.connection = sqlite3.connect(database_file)
         self.cursor = self.connection.cursor()
 
-
-    def get_subs(self, status = True):
-        """Getting all active subs"""
+    def get_subscriptions(self, status=True):
+        """Получаем всех активных подписчиков бота"""
         with self.connection:
-            return self.cursor.execute("SELECT * FROM 'subs' WHERE 'status' = (?)", (status,)).fetchall()
-
+            return self.cursor.execute("SELECT * FROM `subscriptions` WHERE `status` = ?", (status,)).fetchall()
 
     def sub_exists(self, user_id):
         """DataBase check for user.id"""
@@ -20,12 +19,10 @@ class db_controller:
             result = self.cursor.execute("SELECT * FROM subs WHERE user_id = (?)", (user_id,)).fetchall()
             return bool(len(result))
 
-    def add_sub(self, user_id, status = True):
+    def add_sub(self, user_id, status=True):
         """Add new sub"""
         with self.connection:
             return self.cursor.execute("INSERT INTO 'subs' ('user_id', 'status') VALUES (?,?)", (user_id, status))
-
-
 
     def update_subscription(self, user_id, status):
         """Updating sub status"""
@@ -35,6 +32,3 @@ class db_controller:
     def close(self):
         """Closing DB connection"""
         self.connection.close()
-
-
-
