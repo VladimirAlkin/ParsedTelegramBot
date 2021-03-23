@@ -26,11 +26,11 @@ class db_controller:
             return self.cursor.execute("INSERT INTO 'subs' ('user_id', 'status') VALUES (?,?)", (user_id, status))
 
 
-    def update_sub(self, user_id, status = True):
+
+    def update_subscription(self, user_id, status):
         """Updating sub status"""
         with self.connection:
-            return self.cursor.execute("UPDATE 'subs' SET 'status' = (?) WHERE 'user_id' = (?)", (status, user_id))
-
+            return self.cursor.execute("UPDATE `subs` SET `status` = ? WHERE `user_id` = ?", (status, user_id))
 
     def close(self):
         """Closing DB connection"""

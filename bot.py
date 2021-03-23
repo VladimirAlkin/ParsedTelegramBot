@@ -22,8 +22,8 @@ async def subscribe(message: types.Message):
         db.add_sub(message.from_user.id) #add if it aint
         await message.answer("Вы подписались!")
     else:
-        db.update_sub(message.from_user.id, True)
-        await message.answer("Вы уже подписаны! \nОжидайте новостей =)")
+        db.update_subscription(message.from_user.id, True)
+        await message.answer("Вы переподписаны! \nОжидайте новостей =)")
 
 
 
@@ -34,7 +34,7 @@ async def unsubscribe(message: types.Message):
         db.add_sub(message.from_user.id, False)     #add if it aint and make sub field FALSE
         await message.answer("Вы и так не подписаны =/")
     else:
-        db.update_sub(message.from_user.id, False)  #if user exists in db - unsub
+        db.update_subscription(message.from_user.id, False)  #if user exists in db - unsub
         await message.answer("Вы отписались")
 
 
